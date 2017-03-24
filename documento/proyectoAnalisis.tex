@@ -380,7 +380,7 @@ Fax: (888) 555--1212}}
 % As a general rule, do not put math, special symbols or citations
 % in the abstract
 \begin{abstract}
-The abstract goes here.
+\input{abstract}
 \end{abstract}
 
 % no keywords
@@ -402,16 +402,7 @@ The abstract goes here.
 
 \section{Introduction}
 % no \IEEEPARstart
-This demo file is intended to serve as a ``starter file''
-for IEEE conference papers produced under \LaTeX\ using
-IEEEtran.cls version 1.8b and later.
-% You must have at least 2 lines in the paragraph with the drop letter
-% (should never be an issue)
-I wish you the best of success.
-
-\hfill mds
- 
-\hfill August 26, 2015
+\input{introduccion}
 
 \subsection{Subsection Heading Here}
 Subsection text here.
@@ -519,23 +510,11 @@ Subsubsection text here.
 
 
 \section{Conclusion}
-The conclusion goes here.
-
+\input{conclusion}
 
 
 
 % conference papers do not normally have an appendix
-
-
-% use section* for acknowledgment
-\section*{Acknowledgment}
-
-
-The authors would like to thank...
-
-
-
-
 
 % trigger a \newpage just before the given reference
 % number - used to balance the columns on the last page
