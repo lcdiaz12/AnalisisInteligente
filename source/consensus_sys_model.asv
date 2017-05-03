@@ -10,9 +10,7 @@ initValuesC=[0;0.1;0.2;0.3;0.4;0.5]; %valores iniciales
 initv=initValuesC; %copia de valores iniciales
 refC=0.7; % posicion de referencia Consensus
 alpha=0.1;
-a=(ones(7)-eye(7)); %matriz de adyacencia (fully connected)
-% a=zeros(7); % definicion de a para la minima conexión entre agentes
-% a(1:6,7)=1;
+a=(ones(7)-eye(7)); %matriz de adyacencia, unos y ceros en la diagonal
 Tsol=40; %tiempo de solución
 
 % model values
@@ -28,7 +26,6 @@ loads=[300 300 310 350 590 700];
 
 % barrier values
 bvalue=1e-3;
-%bvalue=0;
 
 %valores iniciales para cada piston
 for i=1:1:6
@@ -86,19 +83,18 @@ hold(axes1,'all'); %acotar los ejes a los limites definidos(aplicar axes1)
 hold all
 colors=['b','r','g','m','c','y'];
 colors2=[1,1,0;1,0,1;0,1,1;1,0,0;0,1,0;0,0,1;1,1,1;0,0,0];
-colors3=[0.9,0.9,0;0.9,0,0.9;0,0.9,0.9;0.9,0,0;0,0.9,0;0,0,0.9;0.9,0.9,0.9;0,0,0];
+colors2=[0.9,0.9,0;0.9,0,0.9;0,0.9,0.9;0.9,0,0;0,0.9,0;0,0,0.9;0.9,0.9,1;0,0,0];
 for i=1:1:6
     plot(timec,posc(:,i),'Color',colors2(i,:),'linewidth',2);
-    plot(times,real(poss(:,i)),'Color',colors3(i,:),'LineStyle','--','linewidth',2);
+    plot(timec,posc(:,i),strcat(colors(i),'*'),'linewidth',1);
+    plot(times,real(poss(:,i)),strcat(colors(i),'--'),'linewidth',2);
 end
 %plot(time,pos(:,1),time,pos(:,2),time,pos(:,3),time,pos(:,4),'r','linewidth',2);
 xlabel('Tiempo [s]','Interpreter','latex','FontSize',22);
 ylabel('Desplazamiento $x(t)$','Interpreter','latex','FontSize',22);
 title('Resultado posicion','Interpreter','latex','LineWidth',1,'FontSize',22);
 legend('piston1C','piston1','piston2C','piston2','piston3C','piston3','piston4C','piston4','piston5C','piston5','piston6C','piston6')
-for i=1:1:6
-    plot(timec,posc(:,i),'Color',colors3(i,:),'Marker','*','linewidth',0.5);
-end
+
 
 
 h1=figure(2);
@@ -112,12 +108,12 @@ box(axes1,'on');% grafica el borde de los ejes al rededor de la gráfia
 hold(axes1,'all'); %acotar los ejes a los limites definidos(aplicar axes1)
 hold all
 for i=1:1:6
-    plot(times,abs(us(:,i)),'Color',colors2(i,:),'linewidth',2);
+    plot(times,abs(us(:,i)),'--','linewidth',2);
 end
 %plot(time,pos(:,1),time,pos(:,2),time,pos(:,3),time,pos(:,4),'r','linewidth',2);
 xlabel('Tiempo [s]','Interpreter','latex','FontSize',22);
-ylabel('Magnitud','Interpreter','latex','FontSize',22);
-title('Senales de Control','Interpreter','latex','LineWidth',1,'FontSize',22);
+ylabel('Desplazamiento $x(t)$','Interpreter','latex','FontSize',22);
+title('Resultado posicion','Interpreter','latex','LineWidth',1,'FontSize',22);
 legend('u1','u2','u3','u4','u5','u6')
 
 

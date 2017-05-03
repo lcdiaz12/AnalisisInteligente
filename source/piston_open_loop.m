@@ -30,7 +30,7 @@ T=1/1000; % periodo de muestreo de los datos
 for k=1:1:10000
     time(k)=k*T; %tiempo en cada iteración
     tSpan=[0 T];% intervalo de solucion
-    [tt,xx]=ode45('odefcn',tSpan,xk,[],u1(k),u2(k));%[](no opciones),para(argumentos adicionales)
+    [tt,xx]=ode45('odefcn',tSpan,xk,[],u2(k));%[](no opciones),para(argumentos adicionales)
     xk=xx(length(xx),:); % A/D
     x(k,:)=xk; %th(k)=xk(1);%guarada valor de la variable de estado1
 %     error=ref-xk(1);

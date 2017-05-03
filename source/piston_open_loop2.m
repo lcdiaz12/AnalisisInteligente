@@ -6,22 +6,31 @@ clc
 %% Datos del sistema
 
 %xk=zeros(4,1); % definicion del valor actual como las condiciones inicales
-xk = [1 0 6e6 0];
+xk = [1 0 6e6 0 0];
 %xk=[0 ;0];
 %ut_1=[0;0]; % valor inicial de parametro adicional (señal de control u)
-u=0;
+u=1e-6;
+K=1.5e-2;
+Ki=1e-6;
+int=0;
 ref=2;
+% u1=zeros(1,10000);
+% u2=zeros(1,10000);
+% u1(1000:4000)=1;
+% u1(5000:8000)=-1;
 
 
 %% solución al sistema para encontrar su comportamiento
-T=1/1000; % periodo de muestreo de los datos
-for k=1:1:20000
+T=1/100; % periodo de muestreo de los datos
+for k=1:1:1000
     time(k)=k*T; %tiempo en cada iteración
     tSpan=[0 T];% intervalo de solucion
     [tt,xx]=ode45('odefcn2',tSpan,xk,[],u);%[](no opciones),para(argumentos adicionales)
     xk=xx(length(xx),:); % A/D
     x(k,:)=xk; %th(k)=xk(1);%guarada valor de la variable de estado1
-    u=-5e-3*x(1);%-0.1*x(2);% asignación de la señal de control
+    error=ref-xk(1);
+    int=int+error;
+    u=(K*error)+Ki*int;
     ut(k)=u;
     %ut_1=[0;0];
 end

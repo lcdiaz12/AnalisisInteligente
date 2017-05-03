@@ -1,7 +1,7 @@
 function dydt = odefcn(t,y,~,u)
 
 % constant model values
-m=10;
+m=50;
 A1=19.64;
 A2=16.49;
 FL=1000; % fuerza de la carga

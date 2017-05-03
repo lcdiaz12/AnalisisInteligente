@@ -1,11 +1,11 @@
-function dydt = odefcn2(t,y,~,u)
+function dydt = odefcn2(t,y,~,u,M)
 
 % constant model values
 m=74; %Kg
 ks=1610; %N/m
 bd=310; %N/(m/s)
 A=3.26e-4; %m^2
-M=300; %N
+%M=300; %N
 alpha=1.51e10; %N/m^3
 beta=1; %1/s
 Ps=1.03e7; %pa
@@ -24,8 +24,9 @@ dydt = zeros(4,1);
 dydt(1) = y(2);
 dydt(2) = (1/m)*(-ks*y(1)-bd*y(2)+A*y(3)-Fr-M);
 dydt(3) = -alpha*y(2)-beta*y(3)+(gamma*sqrt(Ps-sign(y(4))*y(3)))*y(4);
-dydt(4) = -(1/T)*y(4)+(K/T)*u;
-%dydt(5) = -cn*y(4)-bn*y(5)+an*u;
+%dydt(4) = -(1/T)*y(4)+(K/T)*u;
+dydt(4) = y(5);
+dydt(5) = -cn*y(4)-bn*y(5)+an*u;
 
 
 

@@ -1,37 +1,39 @@
-function [x,time,u]=piston(xk,ref,K,Ki,T,Tsol)
-
+function [x,time,u]=piston2(xk,ref,K,Ki,T,Tsol,M)
 %% Datos del sistema
 
-% u=0;
-% u1=0;
-% u2=0;
-error=ref-xk(1);
-u=-(K*error);
-% ref=4;
-% K=1;
-% Ki=1e-4;
+%xk=zeros(4,1); % definicion del valor actual como las condiciones inicales
+%xk = [1 0 6e6 0 0];
+%xk=[0 ;0];
+%ut_1=[0;0]; % valor inicial de parametro adicional (señal de control u)
+u=1e-6;
+% K=1e-2;
+% Ki=1e-7;
 int=0;
-%xk = [x1i,x2i];
+%ref=0.5;
+% u1=zeros(1,10000);
+% u2=zeros(1,10000);
+% u1(1000:4000)=1;
+% u1(5000:8000)=-1;
+
 
 %% solución al sistema para encontrar su comportamiento
-%T=1/1000; % periodo de muestreo de los datos
+%T=1/100; % periodo de muestreo de los datos
 for k=1:1:Tsol/T
     time(k)=k*T; %tiempo en cada iteración
     tSpan=[0 T];% intervalo de solucion
-    [tt,xx]=ode45('odefcn',tSpan,xk,[],u(k));%[](no opciones),para(argumentos adicionales)
+    [tt,xx]=ode45('odefcn2',tSpan,xk,[],u(k),M);%[](no opciones),para(argumentos adicionales)
     xk=xx(length(xx),:); % A/D
     x(k,:)=xk; %th(k)=xk(1);%guarada valor de la variable de estado1
     error(k)=ref-xk(1);
-    u(k+1)=-(K*error(k)+Ki*int(k));%-0.1*x(2);% asignación de la señal de control
-    
     int(k+1)=int(k)+error(k);
-
+    u(k+1)=(K*error(k)+Ki*int(k));
+    %u=(K*error)+Ki*int;
+    %ut(k)=u;
+    %ut_1=[0;0];
 end
 
 
-
-
-
+% 
 % h1=figure(1);
 % axes1 = axes('Parent',h1,'FontSize',15);
 % set(gcf, 'Position', get(0,'Screensize'))% ampliar la gráfica a toda la pantalla
@@ -58,15 +60,11 @@ end
 % ylim(axes1,'auto'); % definicion de los limites del eje y 
 % box(axes1,'on');% grafica el borde de los ejes al rededor de la gráfia
 % hold(axes1,'all'); %acotar los ejes a los limites definidos(aplicar axes1)
-% plot(time,x(:,3),'r','linewidth',2);
-% plot(time,x(:,4),'g','linewidth',2);
-% plot(time,x(:,5),'b','linewidth',2);
+% plot(time,x(:,3),'g','linewidth',2);
 % xlabel('Tiempo [s]','Interpreter','latex','FontSize',22);
 % ylabel('presiom [psi]','Interpreter','latex','FontSize',22);
 % title('presion','Interpreter','latex','LineWidth',1,'FontSize',22);
-% legend('PA','PB','Pp')
-
-
+% %legend('Valor deseado','Velocidad resultante')
 end
 
 
