@@ -115,13 +115,15 @@
 
 % *** GRAPHICS RELATED PACKAGES ***
 %
+\usepackage{caption} % para poder agragar caption a las tablas
+
 \ifCLASSINFOpdf
-  % \usepackage[pdftex]{graphicx}
+   \usepackage[pdftex]{graphicx}
   % declare the path(s) where your graphic files are
   % \graphicspath{{../pdf/}{../jpeg/}}
   % and their extensions so you won't have to specify these with
   % every instance of \includegraphics
-  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+   \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
 \else
   % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
   % will default to the driver specified in the system graphics.cfg if no
@@ -310,7 +312,10 @@
 
 % correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor}
-
+\usepackage[utf8x]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\renewcommand\spanishtablename{Tabla}
 
 \begin{document}
 %
@@ -320,28 +325,30 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{Bare Demo of IEEEtran.cls\\ for IEEE Conferences}
+\title{Sistema Plataforma Multiagente Para el Levantamiento de Vehículos de $n$ Ejes }
 
 
 % author names and affiliations
 % use a multiple column layout for up to three different
 % affiliations
-\author{\IEEEauthorblockN{Michael Shell}
-\IEEEauthorblockA{School of Electrical and\\Computer Engineering\\
-Georgia Institute of Technology\\
-Atlanta, Georgia 30332--0250\\
-Email: http://www.michaelshell.org/contact.html}
+\author{\IEEEauthorblockN{Alvaro Javier Flórez Martínez}
+\IEEEauthorblockA{Escuela de Electrica y Electrónica\\
+Universidad de los Andes\\
+Bogotá\\
+Email: aj.florez@uniandes.edu.co}
+\and
+\IEEEauthorblockN{Luis Carlos Díaz Buatista}
+\IEEEauthorblockA{Escuela de Electrica y Electrónica\\
+Universidad de los Andes\\
+Bogotá\\
+Email: lc.diaz@uniandes.edu.co}
 \and
 \IEEEauthorblockN{Homer Simpson}
 \IEEEauthorblockA{Twentieth Century Fox\\
 Springfield, USA\\
-Email: homer@thesimpsons.com}
-\and
-\IEEEauthorblockN{James Kirk\\ and Montgomery Scott}
-\IEEEauthorblockA{Starfleet Academy\\
-San Francisco, California 96678--2391\\
-Telephone: (800) 555--1212\\
-Fax: (888) 555--1212}}
+Email: homer@thesimpsons.com}}
+
+
 
 % conference papers do not typically use \thanks and this command
 % is locked out in conference mode. If really needed, such as for
@@ -400,16 +407,28 @@ Fax: (888) 555--1212}}
 
 
 
-\section{Introduction}
+\section{Introducción}
 % no \IEEEPARstart
 \input{introduccion}
 
-\subsection{Subsection Heading Here}
-Subsection text here.
+
+\section{Sistema de Elevación}
+\input{sistemaElevacion}
 
 
-\subsubsection{Subsubsection Heading Here}
-Subsubsection text here.
+\section{Consensus}
+\input{consensus}
+
+\section{Restricciones}
+\input{restricciones}
+
+
+\section{Ensamble modelo real}
+\input{acople}
+
+
+\section{Simulaciones}
+\input{simulaciones}
 
 
 % An example of a floating figure using the graphicx package.
@@ -538,15 +557,17 @@ Subsubsection text here.
 % <OR> manually copy in the resultant .bbl file
 % set second argument of \begin to the number of references
 % (used to reserve space for the reference number labels box)
-\begin{thebibliography}{1}
+%\begin{thebibliography}{1}
+%
+%\bibitem{IEEEhowto:kopka}
+%H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
+%  0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
+%
+%\end{thebibliography}
 
-\bibitem{IEEEhowto:kopka}
-H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
-  0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
-
-\end{thebibliography}
-
-
+\bibliographystyle{IEEEtran}
+% argument is your BibTeX string definitions and bibliography database(s)
+\bibliography{biblio}
 
 
 % that's all folks

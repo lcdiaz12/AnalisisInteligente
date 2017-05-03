@@ -1,0 +1,20 @@
+
+
+Las restricciones para el sistema representan una condición importante debido a que si no se cumplen podría fallar todo el funcionamiento. Una manera de abordar este requerimiento es desde el punto de vista de optimización, visualizando el consensus cómo la minimización de a distancia entre agentes  y en la cual se llega a la solución mediante el método del gradiente descendente ya que se tiene unas dinámicas de la forma $\dot{x}=-\nabla_xf(x)$. Vamos entonces a considerar los métodos de barrera para una optimización con restricciones, la región factible está definida por\\
+$S=\{x\in \mathbb{R}^n : g_i(x)\leq 0, i=1,\ldots,n \}$\\
+En los métodos de barrera se asume que es dado un punto $x^0$ que está dentro de la región factible $S$, y nosotros imponemos un alto costo en los puntos dentro de la región factible que están cerca al borde, creando así una barrera para dejar la región factible \cite{barriermethods_epelman}.
+
+Una función barrera es cualquier función continua $b(x)$ definida en el interior de la región factible $S$ tal que $b(x)\rightarrow +\infty$ cuando $g_i(x) \rightarrow 0^-$.\cite{Nonlinear_Programming_zorning}  Dos ejemplos comunes para funciones de barrera son\\
+\begin{equation}
+b(x)=-\sum_{i=1}^{n}ln(-g_i(x)) \ \ \ \textnormal{y} \ \ \ b(x)=-\sum_{i=1}^{n}\frac{1}{g_i(x)}
+\label{eq_barriermethods}
+\end{equation}
+
+Note que ahora el problema no tiene restricciones, y la desigualdad $g(x)<0$ está definida en el dominio de la función objetivo.
+
+Para nuestro caso en particular la restricción radica en que las plataformas de elevación podrán desalinearse máximo $1mm$, por tanto la función de barrera diseñada es
+\begin{equation}
+b(x)=\sum_{i=1}^{n}\sum_{j=1}^{n}\frac{b_a}{1-(x_i-x_j)}; \forall j\neq i
+\end{equation}
+
+

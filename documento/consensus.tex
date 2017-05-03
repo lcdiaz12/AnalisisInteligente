@@ -1,0 +1,42 @@
+
+
+En muchos problemas que involucran múltiples agentes que requieren interactuar en una secuencia de tareas, típicamente las tareas y las interacciones pueden ser definidas por actividades en secuencias de tiempo que cada agente debe cumplir en determinado tiempo con recursos definidos, aunque estos problemas pueden ser solucionados con algoritmos de planeación, pueden ocurrir cambios durante la ejecución que harán que la tarea no se complete exitosamente, por tanto es e interés un marco de trabajo que cuando ocurran perturbaciones pueda adaptativamente sugerir cambios en los agentes  que permitan que lleguen a un acuerdo.   \cite{Decentralized_adaptive_scheduling}.
+
+Cuando múltiples vehículos concuerdan en el valor de una variable de interés, se dice que han llegado a un \textit{consensus}, para lograr llegar a este estado, los vehículos deben compartir información en una red, además de tener algoritmos llamados algoritmos de consensus, los cuales negociarán como se llega a la variable deseada  \cite{DistributedConsensusinMulti}
+
+La interacción de agentes en una red con cierta topología es representada por un grafo $G=(V,E)$ con el grupo de nodos $V=\{ 1,2,\ldots,n\}$ y bordes $E\subseteq V \times V$. Los vecinos del agente $i$ son definidos por $N_i=\{j \in V :(i,j)\in E\}$.
+
+
+\subsection{Information Consensus}
+Consideremos una red de agentes con dinámicas $\dot{x}_i=u_i$ interesados en alcanzar un consensu mediante comunicación local con sus vecinos en un grafo $G=(V,E)$. Alcanzar consensus significa que el sistema converge asintóticamente a $x_1=x_2=\ldots =x_n$, es decir que el los valores de cada agente serán $x=\alpha\textbf{1}$ dónde $\alpha \in \mathbb{R}$ es la desición colectiva del grupo de agentes. Sea $A=[a_{ij}]$ a matriz de adyacencia del grafo $G$. El conjunto de vecinos del agente $i$ es $N_i$ y está definido por $N_i=\{j\in V:a_{ij}\neq 0 \} \ \ \ V=\{1,2,\ldots,n \}$.
+
+Note que $a_{ij}>0$ (es vecino) cuando $(i,j)\in E$, de otro modo $a_{ij}=0$. El agente $i$ se comunica con el agente $j$ si $j$ es un vecino.
+Estableciendo $a_{ij}=0$ define el hecho que el vehículo $i$ no puede recibir información desde el vehículo $j$. 
+El conjunto de todos los nodos y sus vecinos define el borde $E$ del grafo. 
+
+\begin{equation}
+\dot{x}_i(t)=\sum_{j\in N_i}a_{ij}(x_j(t)-x_i(t))
+\label{eq_consensusinformation}
+\end{equation}
+
+El sistema lineal definido en \ref{eq_consensusinformation} es un algoritmo distribuido de consensus, este garantiza convergencia a una decisión colectiva mediante interacción local entre agentes \cite{DistributedConsensusinMulti} \cite{Olfati-saber07consensusand} \cite{Ordonez2014} \cite{Decentralized_adaptive_scheduling}.
+Una consecuencia de \ref{eq_consensusinformation} es que la información del estado $x_i(t)$ del vehículo $i$ es llevado hacia la información del estado de sus vecinos.
+Asumiendo que el grafo es unidireccional, es decir $a_{ij}=a_(ji)$ para todo $i,j$, esto conlleva a que la suma de los estados de todos los nodos es una cantidad invariante, o $\sum_i\dot{x}_i=0$, aplicando esta condición dos veces en $t=0$ y en $t=\infty$ se obtiene que:
+\begin{equation}
+\alpha=\frac{1}{n}\sum_{i}x_i(0)
+\end{equation}
+
+Esto puede ser interpretado como que el valor de consensus al que llegarán los agentes será el promedio de los valores iniciales de cada uno.
+
+
+\subsection{Consensus Tracking Protocol}
+En algunas aplicaciones es deseable que el estado de consensus de información converja a un valor predefinido. Por tanto los agentes deben converger a un mismo valor, pero también al estado de su valor de referencia. Por tanto se considera un grupo de $n$ agentes más un líder virtual $n+1$. El estado $x_{n+1}$=$x_r \in \mathbb{R}^n$ contiene la información de referencia para el consensus.
+El grafo $G_{n+1}=(V_{n+1},E_{n+1})$ es usado para modelar la interacción entre $n+1$ vehículos (con el líder virtual). Definamos $A_{n+1}=[a_{ij}] \in \mathbb{R}^{n+1\times n+1}$ la matriz de adyacencia asociada a $G_{n+1}$, dónde $a_{ij}>0$ si $(j,i)\in E_{n+1}$ y $a_{n+1}>0$ si $x_r$ está disponible para el vehículo $i$ para $i=1,2,\ldots,n$. Finalmente, $a_{(n+1)j}=0$ para todo $j=1,2,\ldots,n+1$ y $a_ii=0$ para todo $i=1,2,\ldots,n.$. El líder puede ser interpretado como un nodo que ignora todos los demás nodos, pero continua transmitiendo su información.
+
+De \cite{Ordonez2014}(Theorem1) supone que $A_{n+1}$ es constante. El problema de \textit{Consensus Tracking} conuna referencia constante es resuelto con la definición del líder virtual, si y sólo si el grafo $G_{n+1}$ tiene un árbol de alcance directo (\textit{directed spanning tree})
+
+Note que el vehículo $n+1$ posee la información de la referencia y la condición que $G_{n+1}$ tiene un árbol de alcance directo es equivalente a la condición que al menos, un camino une a todos los vehículos, incluyendo al líder virtual $n+1$.
+
+
+
+
