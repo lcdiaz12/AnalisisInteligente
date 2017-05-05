@@ -1,1 +1,22 @@
-qui introducimos
+Las ciudades más pobladas del mundo presentan grandes retos de movilidad, por lo que deben implementar sistemas integrados de transporte masivo; entre los que se cuentan lo metros, trenes ligeros, tranvías o un sistemas de buses articulados con carriles exclusivos como es el caso de varias ciudades en Colombia.
+Los vehículos utilizados en estos sistemas de transporte suelen ser de gran envergadura, esto provoca que se dificulte su manipulación para labores de mantenimientos preventivo y correctivo, estás operaciones son indispensables en la operación de cualquier sistema de transporte público.
+
+En el caso de Colombia, sistemas como TransMilenio SITP tienen vehículos articulados o bi-articulados. La tabla \ref{table:busesTM} presenta un resumen de las especificaciones de sus buses de mayor tamaño. Tradicionalmente, se han utilizado arreglos distribuidos de elevadores hidráulicos de carga para hacer el mantenimientos de estos buses, sin embargo, esta práctica supone un riesgo de volcamiento de los vehículos al momento de elevarlos, esto puede ocurrir debido a que uno o más de los elevadores que componen el arreglo presenten un desnivel.
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\hline
+			Especificación&Articulado&Bi-articulado\\\hline
+			cuerpos&2&3\\
+			fuelles&1&2\\
+			longitud&18(m)&24.85(m)\\
+			ejes&3&4\\
+			capacidad&180&250\\
+		\hline
+	\end{tabular}
+	\caption{Especificaciones técnicas buses articulados.}
+	\label{table:busesTM}
+\end{table}
+
+Por lo tanto, una  práctica muy aconsejable a la hora de elevar vehículos con estas especificaciones, es hacerlo de manera que en ningún momento haya una diferencia importante en altura entre los diferentes elevadores que componen el arreglo. por estas razones, se considera que aplicar el método consensus, hace el sistema más confiable en el momento de sus operación.
